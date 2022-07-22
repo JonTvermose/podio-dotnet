@@ -357,12 +357,12 @@ namespace PodioAPI.Services
         ///     generated
         /// </param>
         /// <returns>The id of the cloned item</returns>
-        public async Task<int> CloneItem(long itemId, bool silent = false)
+        public async Task<long> CloneItem(long itemId, bool silent = false)
         {
             string url = string.Format("/item/{0}/clone", itemId);
             url = Utility.PrepareUrlWithOptions(url, new CreateUpdateOptions(silent));
             dynamic tw = await _podio.Post<dynamic>(url);
-            return int.Parse(tw["item_id"].ToString());
+            return long.Parse(tw["item_id"].ToString());
         }
 
         /// <summary>
@@ -509,7 +509,7 @@ namespace PodioAPI.Services
         /// <param name="itemId"></param>
         /// <param name="fieldId"></param>
         /// <returns></returns>
-        public async Task<T> GetItemFieldValues<T>(int itemId, int fieldId) where T : new()
+        public async Task<T> GetItemFieldValues<T>(long itemId, int fieldId) where T : new()
         {
             string url = string.Format("/item/{0}/value/{1}", itemId, fieldId);
             return await _podio.Get<T>(url);
@@ -585,7 +585,7 @@ namespace PodioAPI.Services
         /// </summary>
         /// <param name="itemId"></param>
         /// <returns></returns>
-        public async Task<ItemRevision> GetItemRevision(int itemId, int revision)
+        public async Task<ItemRevision> GetItemRevision(long itemId, int revision)
         {
             string url = string.Format("/item/{0}/revision/{1}", itemId, revision);
             return await _podio.Get<ItemRevision>(url);
