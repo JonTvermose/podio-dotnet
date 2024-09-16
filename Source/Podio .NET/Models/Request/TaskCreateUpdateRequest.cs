@@ -105,7 +105,7 @@ namespace PodioAPI.Models.Request
         ///     The reference id for the task. Only for task update operation
         /// </summary>
         [JsonProperty("ref_id", NullValueHandling = NullValueHandling.Ignore)]
-        public int? Id { get; set; }
+        public long? Id { get; set; }
 
         public void SetResponsible(IEnumerable<int> userIds)
         {
